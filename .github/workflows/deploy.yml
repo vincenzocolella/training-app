@@ -23,11 +23,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # 🔍 DIAGNOSTIC STEP: This prints your folder layout to the log
+      - name: List files in repository
+        run: |
+          echo "=== Top Level Files ==="
+          ls -la
+          echo "=== Looking deeper ==="
+          ls -R | grep -v 'node_modules' | head -n 30
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      # We will let this run, but if it fails, the "List files" step above will tell us exactly why
       - name: Install Dependencies
         run: npm install
 
@@ -37,7 +46,7 @@ jobs:
       - name: Upload Production Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # 🏛️ Back to looking at the root dist folder
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
