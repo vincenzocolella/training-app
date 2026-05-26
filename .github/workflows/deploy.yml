@@ -13,10 +13,6 @@ concurrency:
   group: 'pages'
   cancel-in-progress: true
 
-defaults:
-  run:
-    working-directory: ./rome-marathon # 👈 1. Change this if your subfolder is named something else (e.g., ./vite-project)
-
 jobs:
   deploy:
     environment:
@@ -41,7 +37,7 @@ jobs:
       - name: Upload Production Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './rome-marathon/dist' # 👈 2. Make sure this matches your subfolder name too!
+          path: './dist' # Looks exactly at your root build folder
 
       - name: Deploy to GitHub Pages
         id: deployment
