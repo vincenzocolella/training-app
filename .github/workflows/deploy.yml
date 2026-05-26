@@ -28,17 +28,24 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build App
-        run: npm run build
-
-      - name: Upload Production Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist' # Looks exactly at your root build folder
+      # 🧠 SMART STEP: Finds package.json dynamically, installs, and builds there
+      - name: Locate and Build Project
+        run: |
+          TARGET_DIR=$(find . -name package.json -not -path "*/node_modules/*" -exec dirname {} \; | head -n 1)
+          echo "🎯 Target project folder discovered at: $TARGET_DIR"
+          
+          cd "$TARGET_DIR"
+          npm install
+          npm run build
+          
+          # Move the compiled assets out to the root workspace so the deployer can see them
+          if [ "$TARGET_DIR" != "." ]; then
+            echo "📦 Migrating build artifact to root directory..."
+            mv dist "$GITHUB_WORKSPACE/dist"
+          fi
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          path: './dist' # Always deploys from the root workspace folder
