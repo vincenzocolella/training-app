@@ -157,7 +157,14 @@ const trainingPlan: Phase[] = [
       {
         week: 15, runs: [
           { id: "w15r1", type: "Speed", title: "Sharpeners", desc: "4× 400m @ 4:55/km — Rest: 90s walk. Pure speed!", targetKm: 2.5 },
-          { id: "w15r2", type: "Tempo", title: "Light Wave", desc: "30 min: 5 min @ 5:35 / 5 min @ 6:00 alternating", text: "#D4A017", targetKm: 5.4 },
+          // 🏛️ Locate Phase 3 -> Week 15 -> Second Run entry and change it to:
+{ 
+  id: "w15r2", 
+  type: "Tempo", 
+  title: "Light Wave", 
+  desc: "30 min: 5 min @ 5:35 / 5 min @ 6:00 alternating", 
+  targetKm: 5.4 
+},
           { id: "w15r3", type: "Long Run", title: "Chilled Distance", desc: "12 km @ 6:40/km", targetKm: 12 },
         ]
       },
