@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background-color: #0A0A0F;
+}
+
+/* Barra di scorrimento nascosta */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* Finestre modali (form di registrazione e conferma) */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  z-index: 50;
+}
+.modal {
+  background: #12121B;
+  border: 1px solid #2A2A3D;
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 92vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.modal.max-w-sm { max-width: 400px; }
+@media (min-width: 640px) {
+  .modal-bg { align-items: center; padding: 16px; }
+  .modal { border-radius: 20px; padding: 24px; }
+}
