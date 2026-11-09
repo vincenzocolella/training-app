@@ -3,7 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: 'main'
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -38,7 +37,7 @@ jobs:
       - name: Upload Production Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './dist' # Looks exactly at your root build folder
 
       - name: Deploy to GitHub Pages
         id: deployment
